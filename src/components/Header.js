@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { NavLink } from 'react-router-dom'
 
 class Header extends Component {
   render () {
@@ -8,11 +9,11 @@ class Header extends Component {
 
           <ul className='nav navbar-nav'>
             <li className='nav-item'>
-              <button
+              <NavLink to='/signin'
                 className='btn btn-outline-success my-2 my-sm-0'
               >
                 Sign In
-              </button>
+              </NavLink>
             </li>
           </ul>
 

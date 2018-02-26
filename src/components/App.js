@@ -1,13 +1,15 @@
 import React, { Fragment } from 'react'
+import { Route } from 'react-router-dom'
 
 import Header from './Header'
+import Signin from './auth/Signin'
 
 const App = () => {
   return (
     <Fragment>
       <Header />
       <div className='container'>
-        <h1>React Auth</h1>
+        <Route path='/signin' component={Signin} />
       </div>
     </Fragment>
   )

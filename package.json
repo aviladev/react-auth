@@ -6,6 +6,7 @@
     "parser": "babel-eslint"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "babel-eslint": "^8.2.2",
     "bootstrap": "^4.0.0",
     "react": "^16.2.0",
@@ -15,6 +16,7 @@
     "react-scripts": "1.1.1",
     "redux": "^3.7.2",
     "redux-form": "^7.2.3",
+    "redux-thunk": "^2.2.0",
     "standard": "^11.0.0"
   },
   "scripts": {

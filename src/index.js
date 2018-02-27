@@ -5,15 +5,16 @@ import {
   Route,
   Switch
 } from 'react-router-dom'
-import { createStore } from 'redux'
+import { createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
+import reduxThunk from 'redux-thunk'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 import reducers from './reducers'
 
 import App from './components/App'
 
-const store = createStore(reducers)
+const store = createStore(reducers, applyMiddleware(reduxThunk))
 
 ReactDOM.render(
   <Provider store={store}>

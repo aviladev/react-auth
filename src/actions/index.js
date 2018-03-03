@@ -1,6 +1,9 @@
 import axios from 'axios'
 
-import { AUTH_USER } from './types'
+import {
+  AUTH_USER,
+  AUTH_ERROR
+} from './types'
 
 const API_URL = 'http://localhost:8080'
 
@@ -16,6 +19,11 @@ export const signinUser = ({ email, password }, history) =>
 
       history.push('/feature')
     } catch (e) {
-      console.error(e)
+      dispatch(authError('Bad login info'))
     }
   }
+
+export const authError = error => ({
+  type: AUTH_ERROR,
+  payload: error
+})

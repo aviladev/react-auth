@@ -4,6 +4,7 @@ import { Route } from 'react-router-dom'
 import Header from './Header'
 import Signin from './auth/Signin'
 import Signout from './auth/Signout'
+import Signup from './auth/Signup'
 
 const App = () => {
   return (
@@ -12,6 +13,7 @@ const App = () => {
       <div className='container'>
         <Route path='/signin' component={Signin} />
         <Route path='/signout' component={Signout} />
+        <Route path='/signup' component={Signup} />
       </div>
     </Fragment>
   )

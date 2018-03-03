@@ -2,6 +2,7 @@ import axios from 'axios'
 
 import {
   AUTH_USER,
+  UNAUTH_USER,
   AUTH_ERROR
 } from './types'
 
@@ -22,6 +23,12 @@ export const signinUser = ({ email, password }, history) =>
       dispatch(authError('Bad login info'))
     }
   }
+
+export const signoutUser = () => {
+  window.localStorage.removeItem('token')
+
+  return { type: UNAUTH_USER }
+}
 
 export const authError = error => ({
   type: AUTH_ERROR,

@@ -6,18 +6,24 @@ class Signup extends Component {
     console.log(fields)
   }
 
-  renderInput = field => (
+  renderInput = ({
+    input, type, id,
+    meta: { touched, error }
+  }) => (
     <Fragment>
       <input
-        className='form-control'
-        {...field.input}
-        type={field.type}
-        id={field.id}
+        className={`form-control
+          ${touched && error && 'is-invalid'}
+          ${touched && !error && 'is-valid'}
+        `}
+        {...input}
+        type={type}
+        id={id}
       />
       {
-        field.meta.touched &&
-        field.meta.error &&
-        <span className='error'> {field.meta.error} </span>
+        touched &&
+        error &&
+        <div className='invalid-feedback'> {error} </div>
       }
     </Fragment>
   )
@@ -65,6 +71,19 @@ class Signup extends Component {
   }
 }
 
-export default reduxForm({ form: 'signup' })(
+const validate = ({ password, passwordConfirm }) => {
+  const errors = {}
+
+  if (password !== passwordConfirm) {
+    errors.passwordConfirm = 'Passwords must match'
+    errors.password = 'Passwords must match'
+  }
+
+  return errors
+}
+
+export default reduxForm({
+  validate, form: 'signup'
+})(
   Signup
 )

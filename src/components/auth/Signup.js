@@ -71,8 +71,18 @@ class Signup extends Component {
   }
 }
 
-const validate = ({ password, passwordConfirm }) => {
+const validate = ({ email, password, passwordConfirm }) => {
   const errors = {}
+
+  const emptyFields = [
+    { name: 'email', field: email, message: 'Please enter an email' },
+    { name: 'password', field: password, message: 'Please enter a password' },
+    { name: 'passwordConfirm', field: passwordConfirm, message: 'Please enter a password confirmation' }
+  ]
+
+  emptyFields.forEach(({field, name, message}) => {
+    if (!field) errors[name] = message
+  })
 
   if (password !== passwordConfirm) {
     errors.passwordConfirm = 'Passwords must match'

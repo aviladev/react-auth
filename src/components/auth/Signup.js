@@ -1,9 +1,13 @@
 import React, { Component, Fragment } from 'react'
 import { reduxForm, Field } from 'redux-form'
+import { connect } from 'react-redux'
+
+import { signupUser } from '../../actions'
 
 class Signup extends Component {
-  handleFormSubmit = (fields) => {
-    console.log(fields)
+  handleFormSubmit = async ({email, password}) => {
+    await this.props.signupUser({ email, password })
+    this.props.history.push('/feature')
   }
 
   renderInput = ({
@@ -28,8 +32,17 @@ class Signup extends Component {
     </Fragment>
   )
 
+  renderAlert = (message) =>
+    message
+      ? (
+        <div className='alert alert-danger'>
+          <strong>Oops!</strong> {message}
+        </div>
+      )
+      : null
+
   render () {
-    const { handleSubmit } = this.props
+    const { handleSubmit, errorMessage } = this.props
 
     return (
       <form onSubmit={handleSubmit(this.handleFormSubmit)}>
@@ -63,6 +76,7 @@ class Signup extends Component {
           />
         </fieldset>
 
+        {this.renderAlert(errorMessage)}
         <button type='submit' className='btn btn-primary'>
           Sign Up
         </button>
@@ -92,8 +106,11 @@ const validate = ({ email, password, passwordConfirm }) => {
   return errors
 }
 
+const mapStateToProps = ({ auth: {error} }) =>
+  ({ errorMessage: error })
+
 export default reduxForm({
   validate, form: 'signup'
 })(
-  Signup
+  connect(mapStateToProps, { signupUser })(Signup)
 )

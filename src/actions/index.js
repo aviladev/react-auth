@@ -24,6 +24,22 @@ export const signinUser = ({ email, password }, history) =>
     }
   }
 
+export const signupUser = ({email, password}) =>
+  async dispatch => {
+    try {
+      const response = await axios
+        .post(`${API_URL}/signup`, { email, password })
+
+      dispatch({ type: AUTH_USER })
+
+      window.localStorage.setItem('token', response.data.token)
+    } catch ({ response: {
+      data: { reason }
+    }}) {
+      dispatch(authError(reason))
+    }
+  }
+
 export const signoutUser = () => {
   window.localStorage.removeItem('token')
 

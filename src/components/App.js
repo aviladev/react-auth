@@ -6,6 +6,7 @@ import Signin from './auth/Signin'
 import Signout from './auth/Signout'
 import Signup from './auth/Signup'
 import Feature from './Feature'
+import requireAuth from './auth/requireAuth'
 
 const App = () => {
   return (
@@ -16,7 +17,7 @@ const App = () => {
           <Route path='/signin' component={Signin} />
           <Route path='/signout' component={Signout} />
           <Route path='/signup' component={Signup} />
-          <Route path='/feature' component={Feature} />
+          <Route path='/feature' component={requireAuth(Feature)} />
         </Switch>
       </div>
     </Fragment>

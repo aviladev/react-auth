@@ -6,6 +6,7 @@ import Signin from './auth/Signin'
 import Signout from './auth/Signout'
 import Signup from './auth/Signup'
 import Feature from './Feature'
+import Welcome from './Welcome'
 import requireAuth from './auth/requireAuth'
 
 const App = () => {
@@ -18,6 +19,7 @@ const App = () => {
           <Route path='/signout' component={Signout} />
           <Route path='/signup' component={Signup} />
           <Route path='/feature' component={requireAuth(Feature)} />
+          <Route path='/' component={Welcome} />
         </Switch>
       </div>
     </Fragment>

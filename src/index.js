@@ -14,7 +14,15 @@ import reducers from './reducers'
 
 import App from './components/App'
 
-const store = createStore(reducers, applyMiddleware(reduxThunk))
+const token = window.localStorage.getItem('token')
+
+const store = createStore(
+  reducers,
+  { auth: {
+    authenticated: Boolean(token)
+  }},
+  applyMiddleware(reduxThunk)
+)
 
 ReactDOM.render(
   <Provider store={store}>

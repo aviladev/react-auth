@@ -3,7 +3,8 @@ import axios from 'axios'
 import {
   AUTH_USER,
   UNAUTH_USER,
-  AUTH_ERROR
+  AUTH_ERROR,
+  FETCH_MESSAGE
 } from './types'
 
 const API_URL = 'http://localhost:8080'
@@ -50,3 +51,17 @@ export const authError = error => ({
   type: AUTH_ERROR,
   payload: error
 })
+
+export const fetchMessage = () =>
+  async dispatch => {
+    const response = await axios.get(API_URL, {
+      headers: {
+        authorization: window.localStorage.getItem('token')
+      }
+    })
+
+    dispatch({
+      type: FETCH_MESSAGE,
+      payload: response.data.message
+    })
+  }
